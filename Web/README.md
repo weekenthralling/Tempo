@@ -2,7 +2,7 @@
 
 `Web/` 是 Tempo 的免安装网页版：一个单页 PWA，直接用 iPhone Safari 打开就能用。
 
-它和原生版共用同一套交互与声音设计：放大的机械钟摆、30–300 BPM（默认 90）、拍号、细分、重拍、预备拍、Tap Tempo、4 种合成音色、深浅色主题。没有广告，没有账号，没有后端，也不会在加载后发起网络请求。
+它和原生版共用同一套交互与声音设计：放大的机械钟摆（配重块随 BPM 沿摆杆滑动）、30–300 BPM（默认 90）、拍号、细分、重拍、预备拍、Tap Tempo、4 种合成音色、深浅色主题。没有广告，没有账号，没有后端，也不会在加载后发起网络请求。
 
 <p align="center">
   <img src="../Screenshots/web-light.png" width="240" alt="Web 版 · 浅色 · 机械钟摆" />
@@ -104,7 +104,7 @@ ipconfig getifaddr en0
 
 ## 更新与排错
 
-- **改了文件但 iPhone 还看到旧版**：Service Worker 会优先返回缓存。把 `sw.js` 里的 `CACHE_VERSION` 从 `tempo-web-v1` 改成 `tempo-web-v2`，重新部署，再关闭 / 重开主屏幕图标。
+- **改了文件但 iPhone 还看到旧版**：Service Worker 会优先返回缓存。把 `sw.js` 里的 `CACHE_VERSION` 递增（当前是 `tempo-web-v7`，下一次改成 `tempo-web-v8`），重新部署，再关闭 / 重开主屏幕图标。
 - **点播放没有声音**：确认不是静音拨片、系统音量不是 0；先点一下页面任意按钮再点播放（iOS 要求用户手势后才能启动音频）；如果之前接过来电或耳机，刷新页面重试。
 - **屏幕自动变暗**：Safari 不支持 Wake Lock 时，网页无法阻止自动锁定。把自动锁定设为「永不」，或使用原生版。
 - **离线打不开**：Service Worker 只在 HTTPS 或 `localhost` 下工作；通过局域网 IP 的 HTTP 地址访问不会缓存。

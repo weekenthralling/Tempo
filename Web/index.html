@@ -1438,7 +1438,7 @@
 
           <g id="rodGroup">
             <line class="metronome-rod" x1="150" y1="340" x2="150" y2="115"></line>
-            <rect class="metronome-weight" x="132" y="195" width="36" height="11" rx="5.5"></rect>
+            <rect id="metronomeWeight" class="metronome-weight" x="132" y="206.7" width="36" height="11" rx="5.5"></rect>
             <circle class="metronome-tip" cx="150" cy="119" r="5"></circle>
           </g>
 
@@ -2089,6 +2089,7 @@
     tempoItalian: $("#tempoItalian"),
     bpmNumber: $("#bpmNumber"),
     rodGroup: $("#rodGroup"),
+    metronomeWeight: $("#metronomeWeight"),
     pendulumArc: $("#pendulumArc"),
     pendulumTicks: $("#pendulumTicks"),
     stepButtons: $$("[data-step]"),
@@ -2218,6 +2219,14 @@
     dom.bpmNumber.setAttribute("aria-label", `${bpm} BPM`);
     dom.metronome.setAttribute("aria-label", `Metronome, ${bpm} BPM`);
     dom.tempoItalian.textContent = markingFor(bpm).italian;
+
+    // Sliding the weight up lengthens the pendulum (slower), and moving it
+    // toward the pivot shortens it (faster), like a real mechanical metronome.
+    // The scale is compressed toward the fast end, as it is on a real one.
+    const progress = (bpm - MIN_BPM) / (MAX_BPM - MIN_BPM);
+    const eased = 1 - Math.pow(1 - progress, 2);
+    const weightCenterY = 145 + eased * 170;
+    dom.metronomeWeight.setAttribute("y", (weightCenterY - 5.5).toFixed(1));
   }
 
   function renderMeter() {
