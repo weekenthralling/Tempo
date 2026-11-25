@@ -1,0 +1,77 @@
+/* Tempo — 简体中文 */
+
+/* 主界面 */
+"Digit display" = "数字显示";
+"Pendulum display" = "钟摆显示";
+"Time signature" = "拍号";
+"Settings" = "设置";
+"Ready" = "就绪";
+"Count-in" = "预备拍";
+"Bar %lld" = "第 %lld 小节";
+"Tap play to start" = "点按播放开始";
+"BPM" = "BPM";
+"Tap tempo" = "点击测速";
+"TAP" = "TAP";
+"Start" = "开始";
+"Stop" = "停止";
+"Subdivision" = "细分";
+"Increase tempo" = "加快速度";
+"Decrease tempo" = "减慢速度";
+"Audio unavailable" = "音频不可用";
+"OK" = "好";
+
+/* 细分 */
+"subdivision.none" = "无细分";
+"subdivision.eighth" = "八分音符";
+"subdivision.triplet" = "三连音";
+"subdivision.sixteenth" = "十六分音符";
+
+/* 拍号面板 */
+"Common meters" = "常用拍号";
+"Custom" = "自定义";
+"Beats per bar: %lld" = "每小节 %lld 拍";
+"Note value" = "音符时值";
+"1/%lld" = "1/%lld";
+"6/8, 9/8 and 12/8 are compound meters — Tempo accents the first note of each group." = "6/8、9/8、12/8 是复合拍子——Tempo 会强调每一组的第一个音。";
+"Compound" = "复合";
+"Common" = "常见";
+"Done" = "完成";
+
+/* 设置面板 */
+"Click sound" = "敲击音色";
+"Preview sound" = "试听";
+"sound.classic" = "经典";
+"sound.woodblock" = "木鱼";
+"sound.beep" = "电子哔声";
+"sound.digital" = "数码";
+"Timing" = "节拍";
+"Off" = "关闭";
+"1 bar" = "1 小节";
+"2 bars" = "2 小节";
+"3 bars" = "3 小节";
+"4 bars" = "4 小节";
+"Accent first beat" = "强调第一拍";
+"Feedback" = "反馈";
+"Beat haptics" = "节拍震动";
+"Flash on accent" = "重拍闪光";
+"Audio" = "音频";
+"Mix with other audio" = "与其他音频混合";
+"Keep screen awake" = "保持屏幕常亮";
+"Tempo uses the playback audio session, so it keeps ticking with the screen locked or the silent switch on. Lock screen play/pause works too." = "Tempo 使用播放类音频会话，锁屏或静音键开启时仍会继续走拍，也支持锁屏播放/暂停。";
+"About" = "关于";
+"Tempo" = "Tempo";
+"Version %@" = "版本 %@";
+"A single-purpose metronome. No ads, no tracking, no network access." = "只做一件事的节拍器。无广告、无追踪、无网络权限。";
+
+/* 速度术语 */
+"tempo.grave" = "极慢";
+"tempo.largo" = "宽广";
+"tempo.larghetto" = "稍慢";
+"tempo.adagio" = "从容";
+"tempo.andante" = "行板速度";
+"tempo.moderato" = "中速";
+"tempo.allegretto" = "轻快";
+"tempo.allegro" = "快速";
+"tempo.vivace" = "活泼";
+"tempo.presto" = "急速";
+"tempo.prestissimo" = "极速";

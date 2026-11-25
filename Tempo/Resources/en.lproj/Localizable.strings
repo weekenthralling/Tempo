@@ -1,0 +1,78 @@
+/* Tempo — English (development) strings.
+   Keys are the English source strings, so this file is mostly a reference. */
+
+/* Main screen */
+"Digit display" = "Digit display";
+"Pendulum display" = "Pendulum display";
+"Time signature" = "Time signature";
+"Settings" = "Settings";
+"Ready" = "Ready";
+"Count-in" = "Count-in";
+"Bar %lld" = "Bar %lld";
+"Tap play to start" = "Tap play to start";
+"BPM" = "BPM";
+"Tap tempo" = "Tap tempo";
+"TAP" = "TAP";
+"Start" = "Start";
+"Stop" = "Stop";
+"Subdivision" = "Subdivision";
+"Increase tempo" = "Increase tempo";
+"Decrease tempo" = "Decrease tempo";
+"Audio unavailable" = "Audio unavailable";
+"OK" = "OK";
+
+/* Subdivisions */
+"subdivision.none" = "No subdivision";
+"subdivision.eighth" = "Eighth notes";
+"subdivision.triplet" = "Triplets";
+"subdivision.sixteenth" = "Sixteenth notes";
+
+/* Time signature sheet */
+"Common meters" = "Common meters";
+"Custom" = "Custom";
+"Beats per bar: %lld" = "Beats per bar: %lld";
+"Note value" = "Note value";
+"1/%lld" = "1/%lld";
+"6/8, 9/8 and 12/8 are compound meters — Tempo accents the first note of each group." = "6/8, 9/8 and 12/8 are compound meters — Tempo accents the first note of each group.";
+"Compound" = "Compound";
+"Common" = "Common";
+"Done" = "Done";
+
+/* Settings sheet */
+"Click sound" = "Click sound";
+"Preview sound" = "Preview sound";
+"sound.classic" = "Classic";
+"sound.woodblock" = "Woodblock";
+"sound.beep" = "Beep";
+"sound.digital" = "Digital";
+"Timing" = "Timing";
+"Off" = "Off";
+"1 bar" = "1 bar";
+"2 bars" = "2 bars";
+"3 bars" = "3 bars";
+"4 bars" = "4 bars";
+"Accent first beat" = "Accent first beat";
+"Feedback" = "Feedback";
+"Beat haptics" = "Beat haptics";
+"Flash on accent" = "Flash on accent";
+"Audio" = "Audio";
+"Mix with other audio" = "Mix with other audio";
+"Keep screen awake" = "Keep screen awake";
+"Tempo uses the playback audio session, so it keeps ticking with the screen locked or the silent switch on. Lock screen play/pause works too." = "Tempo uses the playback audio session, so it keeps ticking with the screen locked or the silent switch on. Lock screen play/pause works too.";
+"About" = "About";
+"Tempo" = "Tempo";
+"Version %@" = "Version %@";
+"A single-purpose metronome. No ads, no tracking, no network access." = "A single-purpose metronome. No ads, no tracking, no network access.";
+
+/* Tempo markings */
+"tempo.grave" = "Very slow";
+"tempo.largo" = "Broad";
+"tempo.larghetto" = "Slowish";
+"tempo.adagio" = "Leisurely";
+"tempo.andante" = "Walking pace";
+"tempo.moderato" = "Moderate";
+"tempo.allegretto" = "Lively";
+"tempo.allegro" = "Fast";
+"tempo.vivace" = "Very lively";
+"tempo.presto" = "Very fast";
+"tempo.prestissimo" = "Extremely fast";
