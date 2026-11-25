@@ -30,6 +30,17 @@
     --track: rgba(0, 0, 0, 0.09);
     --backdrop: rgba(22, 18, 14, 0.34);
     --shadow: rgba(80, 54, 24, 0.16);
+    --wood-light: #f4e4d0;
+    --wood-body: #e7ccad;
+    --wood-dark: #c89f76;
+    --wood-face: #f8eddf;
+    --wood-edge: #b98e65;
+    --wood-line: rgba(88, 55, 26, 0.22);
+    --wood-ink: #3b291b;
+    --wood-rod: #5d422c;
+    --wood-muted: rgba(59, 41, 27, 0.58);
+    --readout-button: rgba(255, 255, 255, 0.34);
+    --readout-border: rgba(88, 55, 26, 0.16);
     --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
     --rounded: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
   }
@@ -49,6 +60,17 @@
     --track: rgba(255, 255, 255, 0.10);
     --backdrop: rgba(0, 0, 0, 0.52);
     --shadow: rgba(0, 0, 0, 0.42);
+    --wood-light: #3e2d21;
+    --wood-body: #291d15;
+    --wood-dark: #140e0a;
+    --wood-face: #34261c;
+    --wood-edge: #160f0a;
+    --wood-line: rgba(255, 225, 190, 0.17);
+    --wood-ink: #f4e5d1;
+    --wood-rod: #d2b18a;
+    --wood-muted: rgba(244, 229, 209, 0.58);
+    --readout-button: rgba(255, 255, 255, 0.08);
+    --readout-border: rgba(255, 225, 190, 0.15);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -67,6 +89,17 @@
       --track: rgba(255, 255, 255, 0.10);
       --backdrop: rgba(0, 0, 0, 0.52);
       --shadow: rgba(0, 0, 0, 0.42);
+      --wood-light: #3e2d21;
+      --wood-body: #291d15;
+      --wood-dark: #140e0a;
+      --wood-face: #34261c;
+      --wood-edge: #160f0a;
+      --wood-line: rgba(255, 225, 190, 0.17);
+      --wood-ink: #f4e5d1;
+      --wood-rod: #d2b18a;
+      --wood-muted: rgba(244, 229, 209, 0.58);
+      --readout-button: rgba(255, 255, 255, 0.08);
+      --readout-border: rgba(255, 225, 190, 0.15);
     }
   }
 
@@ -444,7 +477,182 @@
   .pendulum-weight { fill: var(--accent); }
   .pendulum-tip { fill: var(--accent); }
 
-  /* ---------- slider ---------- */
+  /* ---------- mechanical metronome ---------- */
+
+  .metronome-section {
+    padding-top: clamp(4px, 1.4vh, 14px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .metronome {
+    position: relative;
+    width: min(82vw, 300px);
+    aspect-ratio: 300 / 420;
+    flex: 0 0 auto;
+    touch-action: manipulation;
+  }
+
+  .metronome-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 18px 20px color-mix(in srgb, var(--shadow) 82%, transparent));
+  }
+
+  .metronome-floor {
+    fill: color-mix(in srgb, var(--shadow) 70%, transparent);
+  }
+  .metronome-body {
+    fill: var(--wood-body);
+    stroke: var(--wood-edge);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+  }
+  .metronome-sheen { pointer-events: none; }
+  .metronome-face {
+    fill: var(--wood-face);
+    stroke: var(--wood-line);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+  .metronome-top {
+    fill: var(--wood-edge);
+    opacity: 0.34;
+  }
+  .metronome-side {
+    fill: var(--wood-edge);
+    opacity: 0.24;
+  }
+  .metronome-base {
+    fill: var(--wood-edge);
+    stroke: color-mix(in srgb, var(--wood-edge) 72%, #000 28%);
+    stroke-width: 0.8;
+  }
+  .metronome-foot {
+    fill: color-mix(in srgb, var(--wood-edge) 62%, #000 38%);
+  }
+  .metronome-grain {
+    stroke: var(--wood-line);
+    stroke-width: 0.8;
+    opacity: 0.45;
+    fill: none;
+  }
+  .metronome-scale {
+    fill: none;
+    stroke: var(--wood-line);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+  .metronome-tick {
+    stroke: var(--wood-line);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+  .metronome-tick.center {
+    stroke: var(--accent);
+    stroke-width: 2.4;
+  }
+  .metronome-rod {
+    stroke: var(--wood-rod);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .metronome-weight {
+    fill: var(--accent);
+    stroke: color-mix(in srgb, var(--accent) 70%, #000 30%);
+    stroke-width: 0.8;
+  }
+  .metronome-tip {
+    fill: var(--accent);
+  }
+  .metronome-pivot {
+    fill: var(--wood-rod);
+  }
+  .metronome-pivot-ring {
+    fill: none;
+    stroke: var(--wood-line);
+    stroke-width: 1;
+  }
+
+  .tempo-readout {
+    position: absolute;
+    top: 6.3%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 66%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    z-index: 2;
+  }
+
+  .tempo-readout .step-button {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--readout-border);
+    border-radius: 50%;
+    background: var(--readout-button);
+    color: var(--wood-ink);
+    opacity: 1;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  .tempo-readout .step-button .icon { width: 15px; height: 15px; }
+  .tempo-readout .step-button:active,
+  .tempo-readout .step-button.pressed { transform: scale(0.9); }
+
+  .readout-center {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .tempo-readout .bpm-number {
+    font-family: var(--rounded);
+    font-size: clamp(42px, 14vw, 58px);
+    line-height: 0.89;
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    font-variant-numeric: tabular-nums;
+    color: var(--wood-ink);
+    text-align: center;
+    min-width: 2.05em;
+  }
+
+  .readout-meta {
+    margin-top: 4px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
+    font-family: var(--rounded);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--wood-muted);
+  }
+  .readout-meta .meta-dot { opacity: 0.45; }
+  .readout-meta .italian {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-size: 10px;
+  }
+
+  .metronome-section + .beat-section { padding-top: clamp(6px, 1.6vh, 14px); }
+
+  /* ---------- slider (legacy, no longer rendered) ---------- */
 
   .slider-section {
     padding-top: clamp(12px, 2.4vh, 22px);
@@ -510,8 +718,8 @@
   /* ---------- transport ---------- */
 
   .controls {
-    margin-top: auto;
-    padding-top: 18px;
+    margin-top: clamp(8px, 1.8vh, 18px);
+    padding-top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1094,16 +1302,13 @@
   @media (max-height: 720px), (max-width: 380px) {
     .app { padding-left: 20px; padding-right: 20px; }
     .beat-section { padding-top: 6px; }
-    .tempo-section { padding-top: 8px; }
-    .slider-section { padding-top: 10px; }
-    .controls { padding-top: 10px; gap: 16px; }
-    .bpm-number { font-size: clamp(64px, 20vw, 72px); }
-    .bpm-block { min-width: 120px; }
-    .pendulum-card { width: 150px; height: 158px; border-radius: 22px; }
-    .pendulum-bpm { bottom: 10px; }
-    .pendulum-bpm strong { font-size: 26px; }
-    .step-button { width: 46px; height: 46px; }
-    .digits-view { gap: 10px; }
+    .controls { gap: 16px; }
+    .metronome { width: min(72vw, 238px); }
+    .tempo-readout .bpm-number { font-size: clamp(38px, 12vw, 46px); }
+    .tempo-readout .step-button { width: 30px; height: 30px; }
+    .tempo-readout .step-button .icon { width: 13px; height: 13px; }
+    .readout-meta { margin-top: 3px; font-size: 7px; }
+    .readout-meta .italian { font-size: 9px; }
     .round-button { width: 68px; height: 68px; }
     .round-button .icon { width: 17px; height: 17px; }
     .start-wrap { width: 100px; height: 100px; }
@@ -1113,11 +1318,28 @@
     .status-line { padding-top: 0; }
     .beat-track { gap: 7px; }
     .beat-dot { width: 15px; height: 15px; }
-    .tempo-marking { font-size: 11px; }
   }
 
   @media (max-height: 620px) {
-    .app { padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
+    .app {
+      padding-top: calc(6px + env(safe-area-inset-top));
+      padding-bottom: calc(6px + env(safe-area-inset-bottom));
+    }
+    .metronome { width: min(63vw, 208px); }
+    .tempo-readout { width: 68%; }
+    .tempo-readout .bpm-number { font-size: clamp(34px, 10.5vw, 40px); min-width: 2em; }
+    .tempo-readout .step-button { width: 28px; height: 28px; }
+    .readout-meta { margin-top: 2px; font-size: 6.5px; }
+    .readout-meta .italian { font-size: 8px; }
+    .metronome-section { padding-top: 2px; }
+    .metronome-section + .beat-section { padding-top: 4px; }
+    .controls { margin-top: 4px; gap: 12px; }
+    .beat-track { min-height: 18px; }
+    .beat-dot { width: 13px; height: 13px; }
+    .beat-dot::after { width: 7px; height: 7px; }
+    .state-line { height: 15px; }
+    .status-line { height: 17px; }
+    .web-notice { margin-top: 4px; padding: 6px 8px; font-size: 10.5px; }
   }
 
   @media (max-width: 380px) {
@@ -1174,14 +1396,6 @@
     </button>
 
     <div class="top-actions">
-      <div class="mode-toggle" role="group" aria-label="Tempo display">
-        <button class="mode-button" type="button" data-mode="digits" aria-label="Digits display" aria-pressed="false">
-          <span class="digits-glyph" aria-hidden="true">123</span>
-        </button>
-        <button class="mode-button" type="button" data-mode="pendulum" aria-label="Pendulum display" aria-pressed="true">
-          <svg class="icon" aria-hidden="true"><use href="#i-metronome"></use></svg>
-        </button>
-      </div>
       <button id="settingsButton" class="icon-button" type="button" aria-label="Settings" aria-haspopup="dialog">
         <svg class="icon" aria-hidden="true"><use href="#i-gear"></use></svg>
       </button>
@@ -1189,56 +1403,75 @@
   </header>
 
   <main class="main">
+    <section class="metronome-section" aria-label="Metronome">
+      <div id="metronome" class="metronome" role="group" aria-label="Metronome, 90 BPM">
+        <svg id="metronomeSvg" class="metronome-svg" viewBox="0 0 300 420" aria-hidden="true">
+          <defs>
+            <linearGradient id="metronomeSheen" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.22" />
+              <stop offset="0.42" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="1" stop-color="#000000" stop-opacity="0.13" />
+            </linearGradient>
+            <linearGradient id="metronomeTopShade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.22" />
+              <stop offset="1" stop-color="#000000" stop-opacity="0.14" />
+            </linearGradient>
+          </defs>
+
+          <ellipse class="metronome-floor" cx="150" cy="408" rx="126" ry="8" />
+          <path class="metronome-body" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 H 267 C 286 410 296 403 294 385 L 263 31 C 262 23 258 18 250 18 Z" />
+          <path class="metronome-sheen" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 H 267 C 286 410 296 403 294 385 L 263 31 C 262 23 258 18 250 18 Z" fill="url(#metronomeSheen)" />
+          <path class="metronome-side" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 L 46 397 L 55 59 C 56 51 60 48 67 48 Z" />
+          <path class="metronome-side" d="M 250 18 C 258 18 262 23 263 31 L 294 385 C 296 403 286 410 267 410 L 254 397 L 245 59 C 244 51 240 48 233 48 Z" />
+          <path class="metronome-top" d="M 50 18 H 250 C 258 18 262 23 263 31 L 265 45 H 35 L 37 31 C 38 23 42 18 50 18 Z" fill="url(#metronomeTopShade)" />
+          <path class="metronome-face" d="M 63 48 C 57 48 54 52 53 59 L 29 377 C 28 390 34 396 46 396 H 254 C 266 396 272 390 271 377 L 247 59 C 246 52 243 48 237 48 Z" />
+
+          <path class="metronome-grain" d="M 88 66 L 68 370" />
+          <path class="metronome-grain" d="M 111 58 L 98 382" />
+          <path class="metronome-grain" d="M 205 58 L 219 382" />
+          <path class="metronome-grain" d="M 229 66 L 247 370" />
+
+          <g aria-hidden="true">
+            <path id="pendulumArc" class="metronome-scale"></path>
+            <g id="pendulumTicks"></g>
+          </g>
+
+          <g id="rodGroup">
+            <line class="metronome-rod" x1="150" y1="340" x2="150" y2="115"></line>
+            <rect class="metronome-weight" x="132" y="195" width="36" height="11" rx="5.5"></rect>
+            <circle class="metronome-tip" cx="150" cy="119" r="5"></circle>
+          </g>
+
+          <circle class="metronome-pivot-ring" cx="150" cy="340" r="8"></circle>
+          <circle class="metronome-pivot" cx="150" cy="340" r="5.5"></circle>
+
+          <rect class="metronome-base" x="8" y="394" width="284" height="16" rx="7"></rect>
+          <rect class="metronome-foot" x="34" y="408" width="24" height="5" rx="2.5"></rect>
+          <rect class="metronome-foot" x="242" y="408" width="24" height="5" rx="2.5"></rect>
+        </svg>
+
+        <div class="tempo-readout">
+          <button class="step-button" type="button" data-step="-1" aria-label="Decrease tempo">
+            <svg class="icon" aria-hidden="true"><use href="#i-minus"></use></svg>
+          </button>
+          <div class="readout-center">
+            <div id="bpmNumber" class="bpm-number" aria-label="90 BPM">90</div>
+            <div class="readout-meta">
+              <span>BPM</span>
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span id="tempoItalian" class="italian">Moderato</span>
+            </div>
+          </div>
+          <button class="step-button" type="button" data-step="1" aria-label="Increase tempo">
+            <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section class="beat-section" aria-label="Beat position">
       <div id="beatTrack" class="beat-track" aria-hidden="true"></div>
       <div id="stateLine" class="state-line" aria-live="polite">Ready</div>
-    </section>
-
-    <section class="tempo-section" aria-label="Tempo">
-      <div class="tempo-marking">
-        <span id="tempoDescriptor" class="descriptor">Lively</span>
-        <span id="tempoItalian" class="italian">Allegro</span>
-      </div>
-
-      <div id="digitsView" class="tempo-view digits-view hidden">
-        <button class="step-button" type="button" data-step="-1" aria-label="Decrease tempo">
-          <svg class="icon" aria-hidden="true"><use href="#i-minus"></use></svg>
-        </button>
-        <div class="bpm-block">
-          <div id="bpmNumber" class="bpm-number" aria-label="120 BPM">120</div>
-          <div class="bpm-label">BPM</div>
-        </div>
-        <button class="step-button" type="button" data-step="1" aria-label="Increase tempo">
-          <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>
-        </button>
-      </div>
-
-      <div id="pendulumView" class="tempo-view pendulum-view">
-        <button class="step-button" type="button" data-step="-1" aria-label="Decrease tempo">
-          <svg class="icon" aria-hidden="true"><use href="#i-minus"></use></svg>
-        </button>
-        <div class="pendulum-card" id="pendulumCard" aria-label="Pendulum, 120 BPM">
-          <svg id="pendulumSvg" viewBox="0 0 196 204" aria-hidden="true">
-            <path id="pendulumArc" class="pendulum-arc"></path>
-            <g id="pendulumTicks"></g>
-            <circle class="pendulum-pivot" cx="98" cy="138.72" r="4.5"></circle>
-            <g id="rodGroup">
-              <line class="pendulum-rod" x1="98" y1="138.72" x2="98" y2="8.16"></line>
-              <rect class="pendulum-weight" x="83" y="52.27" width="30" height="11" rx="5"></rect>
-              <circle class="pendulum-tip" cx="98" cy="12.16" r="4"></circle>
-            </g>
-          </svg>
-          <div class="pendulum-bpm"><strong id="pendulumBpm">120</strong><span>BPM</span></div>
-        </div>
-        <button class="step-button" type="button" data-step="1" aria-label="Increase tempo">
-          <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>
-        </button>
-      </div>
-    </section>
-
-    <section class="slider-section" aria-label="Tempo slider">
-      <input id="tempoSlider" class="tempo-slider" type="range" min="30" max="300" step="1" value="120" aria-label="BPM">
-      <div class="slider-labels"><span>30</span><span>300</span></div>
     </section>
 
     <section class="controls" aria-label="Transport">
@@ -1431,7 +1664,7 @@
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "tempo.web.v1";
+  const STORAGE_KEY = "tempo.web.v2";
   const MIN_BPM = 30;
   const MAX_BPM = 300;
   const BEATS_MIN = 1;
@@ -1474,11 +1707,10 @@
   ];
 
   const DEFAULT_STATE = {
-    bpm: 120,
+    bpm: 90,
     beats: 4,
     noteValue: 4,
     subdivision: 1,
-    displayMode: "pendulum",
     accentFirstBeat: true,
     flashEnabled: true,
     keepScreenAwake: true,
@@ -1518,7 +1750,6 @@
     state.noteValue = NOTE_VALUES.includes(Number(state.noteValue)) ? Number(state.noteValue) : 4;
     state.subdivision = SUBDIVISIONS.some(item => item.value === Number(state.subdivision))
       ? Number(state.subdivision) : 1;
-    state.displayMode = state.displayMode === "digits" ? "digits" : "pendulum";
     state.clickSound = SOUNDS.some(item => item.id === state.clickSound) ? state.clickSound : "classic";
     state.volume = cleanNumber(state.volume, DEFAULT_STATE.volume, 0, 1);
     state.countInBars = Math.round(cleanNumber(state.countInBars, 0, 0, 4));
@@ -1851,21 +2082,15 @@
   const dom = {
     meterButton: $("#meterButton"),
     meterLabel: $("#meterLabel"),
-    modeButtons: $$("[data-mode]"),
     settingsButton: $("#settingsButton"),
+    metronome: $("#metronome"),
     beatTrack: $("#beatTrack"),
     stateLine: $("#stateLine"),
-    tempoDescriptor: $("#tempoDescriptor"),
     tempoItalian: $("#tempoItalian"),
-    digitsView: $("#digitsView"),
-    pendulumView: $("#pendulumView"),
     bpmNumber: $("#bpmNumber"),
-    pendulumBpm: $("#pendulumBpm"),
-    pendulumCard: $("#pendulumCard"),
     rodGroup: $("#rodGroup"),
     pendulumArc: $("#pendulumArc"),
     pendulumTicks: $("#pendulumTicks"),
-    tempoSlider: $("#tempoSlider"),
     stepButtons: $$("[data-step]"),
     tapButton: $("#tapButton"),
     tapBadge: $("#tapBadge"),
@@ -1921,8 +2146,8 @@
   }
 
   function buildPendulumScale() {
-    const pivot = { x: 98, y: 138.72 };
-    const radius = 204 * 0.64 * 0.98;
+    const pivot = { x: 150, y: 340 };
+    const radius = 225 * 0.98;
     const maxAngle = 24;
     const point = (angle) => {
       const radians = (angle - 90) * Math.PI / 180;
@@ -1957,7 +2182,7 @@
       line.setAttribute("y1", innerPoint.y.toFixed(2));
       line.setAttribute("x2", startPoint.x.toFixed(2));
       line.setAttribute("y2", startPoint.y.toFixed(2));
-      line.setAttribute("class", "pendulum-tick" + (isCenter ? " center" : ""));
+      line.setAttribute("class", "metronome-tick" + (isCenter ? " center" : ""));
       dom.pendulumTicks.appendChild(line);
     }
   }
@@ -1984,20 +2209,15 @@
   }
 
   function setRodAngle(angle) {
-    dom.rodGroup.setAttribute("transform", `rotate(${angle.toFixed(2)} 98 138.72)`);
+    dom.rodGroup.setAttribute("transform", `rotate(${angle.toFixed(2)} 150 340)`);
   }
 
   function renderBPM() {
     const bpm = Math.round(state.bpm);
     dom.bpmNumber.textContent = String(bpm);
     dom.bpmNumber.setAttribute("aria-label", `${bpm} BPM`);
-    dom.pendulumBpm.textContent = String(bpm);
-    dom.pendulumCard.setAttribute("aria-label", `Pendulum, ${bpm} BPM`);
-    dom.tempoSlider.value = String(bpm);
-    dom.tempoSlider.style.setProperty("--progress", `${((bpm - MIN_BPM) / (MAX_BPM - MIN_BPM)) * 100}%`);
-    const marking = markingFor(bpm);
-    dom.tempoDescriptor.textContent = marking.descriptor;
-    dom.tempoItalian.textContent = marking.italian;
+    dom.metronome.setAttribute("aria-label", `Metronome, ${bpm} BPM`);
+    dom.tempoItalian.textContent = markingFor(bpm).italian;
   }
 
   function renderMeter() {
@@ -2014,21 +2234,11 @@
     syncSubdivisionDialog();
   }
 
-  function renderDisplayMode() {
-    const digits = state.displayMode === "digits";
-    dom.digitsView.classList.toggle("hidden", !digits);
-    dom.pendulumView.classList.toggle("hidden", digits);
-    dom.modeButtons.forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.mode === state.displayMode));
-    });
-  }
-
   function renderFull() {
     applyTheme();
     renderBPM();
     renderMeter();
     renderSubdivision();
-    renderDisplayMode();
     syncSettingsUI();
     dom.webNotice.classList.toggle("hidden", state.noticeDismissed);
     dom.volumeInput.value = String(state.volume);
@@ -2053,13 +2263,6 @@
   function adjustBPM(delta) {
     setBPM(state.bpm + delta);
     animatePress($(`[data-step="${delta > 0 ? 1 : -1}"]`));
-  }
-
-  function setDisplayMode(mode) {
-    if (mode !== "digits" && mode !== "pendulum") return;
-    state.displayMode = mode;
-    renderDisplayMode();
-    saveState();
   }
 
   function setTimeSignature(beats, noteValue) {
@@ -2435,18 +2638,9 @@
   // Event wiring
   // ---------------------------------------------------------------------------
 
-  dom.modeButtons.forEach((button) => {
-    button.addEventListener("click", () => setDisplayMode(button.dataset.mode));
-  });
-
   dom.stepButtons.forEach((button) => {
     bindHoldRepeat(button, () => adjustBPM(Number(button.dataset.step)));
   });
-
-  dom.tempoSlider.addEventListener("input", () => {
-    setBPM(Number(dom.tempoSlider.value));
-  });
-  dom.tempoSlider.addEventListener("change", () => saveState());
 
   let tapPointerDownAt = 0;
   dom.tapButton.addEventListener("pointerdown", (event) => {

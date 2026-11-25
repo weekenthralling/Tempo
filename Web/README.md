@@ -2,12 +2,11 @@
 
 `Web/` 是 Tempo 的免安装网页版：一个单页 PWA，直接用 iPhone Safari 打开就能用。
 
-它和原生版共用同一套交互与声音设计：钟摆 / 数字速度显示、30–300 BPM、拍号、细分、重拍、预备拍、Tap Tempo、4 种合成音色、深浅色主题。没有广告，没有账号，没有后端，也不会在加载后发起网络请求。
+它和原生版共用同一套交互与声音设计：放大的机械钟摆、30–300 BPM（默认 90）、拍号、细分、重拍、预备拍、Tap Tempo、4 种合成音色、深浅色主题。没有广告，没有账号，没有后端，也不会在加载后发起网络请求。
 
 <p align="center">
-  <img src="../Screenshots/web-light.png" width="240" alt="Web 版 · 浅色 · 钟摆" />
-  <img src="../Screenshots/web-dark.png" width="240" alt="Web 版 · 深色 · 钟摆" />
-  <img src="../Screenshots/web-digits.png" width="240" alt="Web 版 · 数字显示" />
+  <img src="../Screenshots/web-light.png" width="240" alt="Web 版 · 浅色 · 机械钟摆" />
+  <img src="../Screenshots/web-dark.png" width="240" alt="Web 版 · 深色 · 机械钟摆" />
 </p>
 
 <img src="../Tempo/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="96" alt="Tempo icon" />
