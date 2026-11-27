@@ -506,16 +506,6 @@
     filter: drop-shadow(0 18px 20px color-mix(in srgb, var(--shadow) 42%, transparent));
   }
 
-  .metronome-floor {
-    fill: color-mix(in srgb, var(--shadow) 30%, transparent);
-  }
-  .metronome-base {
-    fill: color-mix(in srgb, var(--text) 14%, transparent);
-    stroke: none;
-  }
-  .metronome-foot {
-    fill: color-mix(in srgb, var(--text) 18%, transparent);
-  }
   .metronome-rod {
     stroke: color-mix(in srgb, var(--text) 52%, transparent);
     stroke-width: 3.2;
@@ -1415,19 +1405,14 @@
     <section class="metronome-section" aria-label="Metronome">
       <div id="metronome" class="metronome" role="group" aria-label="Metronome, 90 BPM">
         <svg id="metronomeSvg" class="metronome-svg" viewBox="0 0 300 420" aria-hidden="true">
-          <ellipse class="metronome-floor" cx="150" cy="408" rx="126" ry="8" />
-          <rect class="metronome-base" x="8" y="394" width="284" height="16" rx="7"></rect>
-          <rect class="metronome-foot" x="34" y="408" width="24" height="5" rx="2.5"></rect>
-          <rect class="metronome-foot" x="242" y="408" width="24" height="5" rx="2.5"></rect>
-
           <g id="rodGroup">
-            <line class="metronome-rod" x1="150" y1="394" x2="150" y2="115"></line>
+            <line class="metronome-rod" x1="150" y1="410" x2="150" y2="115"></line>
             <rect id="metronomeWeight" class="metronome-weight" x="128" y="205" width="44" height="14" rx="7"></rect>
             <circle class="metronome-tip" cx="150" cy="119" r="6"></circle>
           </g>
 
-          <circle class="metronome-pivot-ring" cx="150" cy="394" r="8"></circle>
-          <circle class="metronome-pivot" cx="150" cy="394" r="5.5"></circle>
+          <circle class="metronome-pivot-ring" cx="150" cy="410" r="8"></circle>
+          <circle class="metronome-pivot" cx="150" cy="410" r="5.5"></circle>
         </svg>
 
         <div class="tempo-readout">
@@ -2378,7 +2363,7 @@
   }
 
   function setRodAngle(angle) {
-    dom.rodGroup.setAttribute("transform", `rotate(${angle.toFixed(2)} 150 394)`);
+    dom.rodGroup.setAttribute("transform", `rotate(${angle.toFixed(2)} 150 410)`);
   }
 
   function renderBPM() {
