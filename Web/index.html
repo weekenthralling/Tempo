@@ -509,32 +509,12 @@
   .metronome-floor {
     fill: color-mix(in srgb, var(--shadow) 30%, transparent);
   }
-  .metronome-post {
-    stroke: color-mix(in srgb, var(--text) 24%, transparent);
-    stroke-width: 5;
-    stroke-linecap: round;
-  }
   .metronome-base {
     fill: color-mix(in srgb, var(--text) 14%, transparent);
     stroke: none;
   }
   .metronome-foot {
     fill: color-mix(in srgb, var(--text) 18%, transparent);
-  }
-  .metronome-scale {
-    fill: none;
-    stroke: color-mix(in srgb, var(--text) 18%, transparent);
-    stroke-width: 1.4;
-    stroke-linecap: round;
-  }
-  .metronome-tick {
-    stroke: color-mix(in srgb, var(--text) 24%, transparent);
-    stroke-width: 1.4;
-    stroke-linecap: round;
-  }
-  .metronome-tick.center {
-    stroke: var(--accent);
-    stroke-width: 2.4;
   }
   .metronome-rod {
     stroke: color-mix(in srgb, var(--text) 52%, transparent);
@@ -1436,24 +1416,18 @@
       <div id="metronome" class="metronome" role="group" aria-label="Metronome, 90 BPM">
         <svg id="metronomeSvg" class="metronome-svg" viewBox="0 0 300 420" aria-hidden="true">
           <ellipse class="metronome-floor" cx="150" cy="408" rx="126" ry="8" />
-          <g aria-hidden="true">
-            <path id="pendulumArc" class="metronome-scale"></path>
-            <g id="pendulumTicks"></g>
-          </g>
+          <rect class="metronome-base" x="8" y="394" width="284" height="16" rx="7"></rect>
+          <rect class="metronome-foot" x="34" y="408" width="24" height="5" rx="2.5"></rect>
+          <rect class="metronome-foot" x="242" y="408" width="24" height="5" rx="2.5"></rect>
 
           <g id="rodGroup">
-            <line class="metronome-rod" x1="150" y1="340" x2="150" y2="115"></line>
+            <line class="metronome-rod" x1="150" y1="394" x2="150" y2="115"></line>
             <rect id="metronomeWeight" class="metronome-weight" x="128" y="205" width="44" height="14" rx="7"></rect>
             <circle class="metronome-tip" cx="150" cy="119" r="6"></circle>
           </g>
 
-          <circle class="metronome-pivot-ring" cx="150" cy="340" r="8"></circle>
-          <line class="metronome-post" x1="150" y1="340" x2="150" y2="398"></line>
-          <circle class="metronome-pivot" cx="150" cy="340" r="5.5"></circle>
-
-          <rect class="metronome-base" x="8" y="394" width="284" height="16" rx="7"></rect>
-          <rect class="metronome-foot" x="34" y="408" width="24" height="5" rx="2.5"></rect>
-          <rect class="metronome-foot" x="242" y="408" width="24" height="5" rx="2.5"></rect>
+          <circle class="metronome-pivot-ring" cx="150" cy="394" r="8"></circle>
+          <circle class="metronome-pivot" cx="150" cy="394" r="5.5"></circle>
         </svg>
 
         <div class="tempo-readout">
@@ -2328,8 +2302,6 @@
     bpmNumber: $("#bpmNumber"),
     rodGroup: $("#rodGroup"),
     metronomeWeight: $("#metronomeWeight"),
-    pendulumArc: $("#pendulumArc"),
-    pendulumTicks: $("#pendulumTicks"),
     stepButtons: $$("[data-step]"),
     tapButton: $("#tapButton"),
     tapBadge: $("#tapBadge"),
@@ -2384,48 +2356,6 @@
     if (meta) meta.setAttribute("content", dark ? "#141416" : "#fbf9f5");
   }
 
-  function buildPendulumScale() {
-    const pivot = { x: 150, y: 340 };
-    const radius = 225 * 0.98;
-    const maxAngle = 24;
-    const point = (angle) => {
-      const radians = (angle - 90) * Math.PI / 180;
-      return {
-        x: pivot.x + radius * Math.cos(radians),
-        y: pivot.y + radius * Math.sin(radians)
-      };
-    };
-
-    let path = "";
-    for (let step = 0; step <= 24; step += 1) {
-      const angle = -maxAngle + (step / 24) * 2 * maxAngle;
-      const p = point(angle);
-      path += `${step === 0 ? "M" : "L"}${p.x.toFixed(2)} ${p.y.toFixed(2)} `;
-    }
-    dom.pendulumArc.setAttribute("d", path.trim());
-
-    dom.pendulumTicks.textContent = "";
-    const ns = "http://www.w3.org/2000/svg";
-    for (let index = 0; index <= 8; index += 1) {
-      const t = index / 8 - 0.5;
-      const angle = t * 2 * maxAngle;
-      const isCenter = index === 4;
-      const inner = radius - (isCenter ? 11 : 6);
-      const startPoint = point(angle);
-      const innerPoint = {
-        x: pivot.x + (startPoint.x - pivot.x) * (inner / radius),
-        y: pivot.y + (startPoint.y - pivot.y) * (inner / radius)
-      };
-      const line = document.createElementNS(ns, "line");
-      line.setAttribute("x1", innerPoint.x.toFixed(2));
-      line.setAttribute("y1", innerPoint.y.toFixed(2));
-      line.setAttribute("x2", startPoint.x.toFixed(2));
-      line.setAttribute("y2", startPoint.y.toFixed(2));
-      line.setAttribute("class", "metronome-tick" + (isCenter ? " center" : ""));
-      dom.pendulumTicks.appendChild(line);
-    }
-  }
-
   function buildBeatTrack() {
     const signature = `${state.beats}/${state.noteValue}/${state.accentFirstBeat}`;
     if (signature === lastSignature && dom.beatTrack.children.length) return;
@@ -2448,7 +2378,7 @@
   }
 
   function setRodAngle(angle) {
-    dom.rodGroup.setAttribute("transform", `rotate(${angle.toFixed(2)} 150 340)`);
+    dom.rodGroup.setAttribute("transform", `rotate(${angle.toFixed(2)} 150 394)`);
   }
 
   function renderBPM() {
@@ -3040,7 +2970,6 @@
   // Boot
   // ---------------------------------------------------------------------------
 
-  buildPendulumScale();
   buildMeterGrid();
   buildSoundGrid();
   buildSubdivisionOptions();
