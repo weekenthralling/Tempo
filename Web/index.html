@@ -947,14 +947,29 @@
     letter-spacing: -0.01em;
   }
   .done-button {
+    -webkit-appearance: none;
+    appearance: none;
     border: 0;
+    border-radius: 0;
     background: transparent;
+    box-shadow: none;
     color: var(--accent);
     font-size: 15px;
     font-weight: 650;
-    padding: 6px 0 6px 10px;
+    padding: 6px 0;
     cursor: pointer;
   }
+  .done-button:focus,
+  .done-button:focus-visible {
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+  }
+  .done-button:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .sheet-panel:focus { outline: none; }
 
   .sheet-body {
     display: flex;
@@ -1549,7 +1564,7 @@
 </div>
 
 <dialog id="meterDialog" class="sheet" aria-labelledby="meterDialogTitle">
-  <div class="sheet-panel">
+  <div class="sheet-panel" tabindex="-1">
     <div class="sheet-grabber"></div>
     <div class="sheet-header">
       <h2 id="meterDialogTitle">Time signature</h2>
@@ -1590,7 +1605,7 @@
 </dialog>
 
 <dialog id="settingsDialog" class="sheet" aria-labelledby="settingsDialogTitle">
-  <div class="sheet-panel">
+  <div class="sheet-panel" tabindex="-1">
     <div class="sheet-grabber"></div>
     <div class="sheet-header">
       <h2 id="settingsDialogTitle">Settings</h2>
@@ -1674,7 +1689,7 @@
 </dialog>
 
 <dialog id="subdivisionDialog" class="sheet" aria-labelledby="subdivisionDialogTitle">
-  <div class="sheet-panel">
+  <div class="sheet-panel" tabindex="-1">
     <div class="sheet-grabber"></div>
     <div class="sheet-header">
       <h2 id="subdivisionDialogTitle">Subdivision</h2>
@@ -2604,6 +2619,16 @@
       if (!dialog.open) dialog.showModal();
     } else {
       dialog.setAttribute("open", "");
+    }
+    // Let the sheet itself take initial focus instead of the Done button.
+    // Otherwise iOS may paint a focus plate around Done when it first opens.
+    const panel = dialog.querySelector(".sheet-panel");
+    if (panel) {
+      try {
+        panel.focus({ preventScroll: true });
+      } catch (error) {
+        panel.focus();
+      }
     }
   }
 
