@@ -913,8 +913,9 @@
   .sheet-panel {
     position: relative;
     max-height: 88dvh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     border-radius: 26px 26px 0 0;
     border: 1px solid var(--stroke);
     border-bottom: 0;
@@ -933,6 +934,7 @@
   }
   .sheet-header {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
@@ -956,8 +958,31 @@
 
   .sheet-body {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     gap: 22px;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  @media (max-width: 760px), (pointer: coarse) {
+    dialog.sheet {
+      inset: 0;
+      width: 100%;
+      max-width: none;
+      height: 100dvh;
+      max-height: 100dvh;
+      margin: 0;
+    }
+    dialog.sheet .sheet-panel {
+      height: 100dvh;
+      max-height: 100dvh;
+      border: 0;
+      border-radius: 0;
+      padding-top: calc(8px + env(safe-area-inset-top));
+    }
   }
   .section-label {
     font-size: 11px;
