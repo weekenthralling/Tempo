@@ -61,24 +61,21 @@ struct MetronomeView: View {
         VStack(spacing: 0) {
             header
 
-            Spacer(minLength: compact ? 4 : 14)
-            beatSection
-            Spacer(minLength: compact ? 6 : 16)
             tempoSection(compact: compact)
 
-            sliderSection
-                .padding(.top, compact ? 12 : 22)
-
-            Spacer(minLength: compact ? 10 : 22)
+            beatSection
+                .padding(.top, compact ? 4 : 8)
 
             controlRow(compact: compact)
-            statusLine
-                .padding(.top, compact ? 10 : 16)
+                .padding(.top, compact ? 4 : 8)
+
+            sliderSection
+                .padding(.top, compact ? 8 : 14)
         }
         .padding(.horizontal, 24)
         .padding(.top, 10)
         .padding(.bottom, compact ? 6 : 14)
-        .frame(maxWidth: 560, maxHeight: .infinity)
+        .frame(maxWidth: 560, maxHeight: .infinity, alignment: .top)
         .frame(maxWidth: .infinity)
     }
 
@@ -161,41 +158,16 @@ struct MetronomeView: View {
     }
 
     private var beatSection: some View {
-        VStack(spacing: 8) {
-            BeatTrack(
-                beats: engine.timeSignature.beats,
-                accents: engine.timeSignature.accentedBeats,
-                current: engine.isRunning ? engine.displayedBeat : -1,
-                theme: theme
-            )
-
-            HStack(spacing: 8) {
-                if engine.isCountingIn {
-                    Text("Count-in")
-                        .font(.system(size: 10, weight: .bold))
-                        .tracking(1.4)
-                        .foregroundStyle(theme.accent)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(Capsule().fill(theme.accent.opacity(0.14)))
-                } else if engine.isRunning {
-                    Text(verbatim: localizedInteger("Bar %lld", engine.displayedBar + 1))
-                        .font(.system(size: 10, weight: .semibold))
-                        .tracking(1)
-                        .foregroundStyle(theme.secondaryText)
-                } else {
-                    Text("Ready")
-                        .font(.system(size: 10, weight: .semibold))
-                        .tracking(1)
-                        .foregroundStyle(theme.secondaryText)
-                }
-            }
-            .frame(height: 18)
-        }
+        BeatTrack(
+            beats: engine.timeSignature.beats,
+            accents: engine.timeSignature.accentedBeats,
+            current: engine.isRunning ? engine.displayedBeat : -1,
+            theme: theme
+        )
     }
 
     private func tempoSection(compact: Bool) -> some View {
-        VStack(spacing: 2) {
+        VStack(spacing: compact ? 2 : 4) {
             HStack(spacing: 7) {
                 Text(LocalizedStringKey(engine.tempoMarking.descriptorKey))
                     .font(.system(size: 12, weight: .semibold))
@@ -217,24 +189,24 @@ struct MetronomeView: View {
 
     private func digitsTempo(compact: Bool) -> some View {
         VStack(spacing: 2) {
-            HStack(spacing: compact ? 10 : 18) {
-                HoldRepeatButton(systemName: "minus", theme: theme, size: compact ? 46 : 50) {
+            HStack(spacing: compact ? 10 : 14) {
+                HoldRepeatButton(systemName: "minus", theme: theme, size: compact ? 40 : 44) {
                     adjustBPM(by: -1)
                 }
 
                 Text("\(Int(engine.bpm.rounded()))")
-                    .font(.system(size: compact ? 72 : 94, weight: .bold, design: .rounded))
+                    .font(.system(size: compact ? 52 : 64, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .contentTransition(.numericText(value: engine.bpm))
                     .animation(.snappy(duration: 0.16), value: engine.bpm)
                     .foregroundStyle(theme.primaryText)
-                    .frame(minWidth: compact ? 132 : 176)
+                    .frame(minWidth: compact ? 112 : 142)
                     .minimumScaleFactor(0.7)
                     .lineLimit(1)
                     .accessibilityLabel(Text("BPM"))
                     .accessibilityValue(Text("\(Int(engine.bpm.rounded()))"))
 
-                HoldRepeatButton(systemName: "plus", theme: theme, size: compact ? 46 : 50) {
+                HoldRepeatButton(systemName: "plus", theme: theme, size: compact ? 40 : 44) {
                     adjustBPM(by: 1)
                 }
             }
@@ -247,18 +219,38 @@ struct MetronomeView: View {
     }
 
     private func pendulumTempo(compact: Bool) -> some View {
-        HStack(spacing: compact ? 8 : 14) {
-            HoldRepeatButton(systemName: "minus", theme: theme, size: compact ? 46 : 50) {
-                adjustBPM(by: -1)
+        VStack(spacing: compact ? 2 : 5) {
+            HStack(spacing: compact ? 8 : 12) {
+                HoldRepeatButton(systemName: "minus", theme: theme, size: compact ? 34 : 38) {
+                    adjustBPM(by: -1)
+                }
+
+                VStack(spacing: 0) {
+                    Text("\(Int(engine.bpm.rounded()))")
+                        .font(.system(size: compact ? 34 : 40, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .contentTransition(.numericText(value: engine.bpm))
+                        .animation(.snappy(duration: 0.16), value: engine.bpm)
+                        .foregroundStyle(theme.primaryText)
+                        .frame(minWidth: compact ? 66 : 78)
+                        .lineLimit(1)
+                        .accessibilityLabel(Text("BPM"))
+                        .accessibilityValue(Text("\(Int(engine.bpm.rounded()))"))
+
+                    Text("BPM")
+                        .font(.system(size: 9, weight: .bold))
+                        .tracking(2.4)
+                        .foregroundStyle(theme.secondaryText)
+                }
+
+                HoldRepeatButton(systemName: "plus", theme: theme, size: compact ? 34 : 38) {
+                    adjustBPM(by: 1)
+                }
             }
 
             MetronomePendulum(theme: theme, compact: compact)
-
-            HoldRepeatButton(systemName: "plus", theme: theme, size: compact ? 46 : 50) {
-                adjustBPM(by: 1)
-            }
+                .padding(.top, compact ? 2 : 4)
         }
-        .padding(.top, compact ? 4 : 8)
     }
 
     private var sliderSection: some View {
@@ -362,25 +354,6 @@ struct MetronomeView: View {
         }
         .accessibilityLabel(Text("Subdivision"))
         .accessibilityValue(Text(LocalizedStringKey(engine.subdivision.titleKey)))
-    }
-
-    private var statusLine: some View {
-        HStack(spacing: 7) {
-            if engine.isRunning {
-                Text(verbatim: localizedInteger("Bar %lld", engine.displayedBar + 1))
-                if engine.subdivision != .none {
-                    Text("·")
-                    Text("×" + engine.subdivision.badge)
-                }
-            } else {
-                Text("Tap play to start")
-            }
-        }
-        .font(.system(size: 11, weight: .medium))
-        .monospacedDigit()
-        .foregroundStyle(theme.secondaryText.opacity(0.85))
-        .frame(height: 16)
-        .animation(.easeInOut(duration: 0.2), value: engine.isRunning)
     }
 
     private var flashOverlay: some View {
