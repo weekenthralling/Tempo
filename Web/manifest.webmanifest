@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#faf7f2",
-  "theme_color": "#faf7f2",
+  "background_color": "#fbf9f5",
+  "theme_color": "#fbf9f5",
   "lang": "en",
   "categories": ["music", "utilities"],
   "icons": [

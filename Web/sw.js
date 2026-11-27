@@ -1,5 +1,5 @@
 /* Tempo Web — offline cache. Bump CACHE_VERSION when assets change. */
-const CACHE_VERSION = "tempo-web-v22";
+const CACHE_VERSION = "tempo-web-v23";
 const APP_SHELL = [
   "./",
   "./index.html",

@@ -6,7 +6,7 @@
 <meta name="format-detection" content="telephone=no">
 <title>Tempo</title>
 <meta name="description" content="A quiet, ad-free metronome that runs in the browser.">
-<meta name="theme-color" content="#faf7f2">
+<meta name="theme-color" content="#fbf9f5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,9 +17,9 @@
 <style>
   :root {
     color-scheme: light;
-    --bg-top: #faf7f2;
-    --bg-bottom: #e6e2db;
-    --glow: rgba(240, 128, 10, 0.12);
+    --bg-top: #fbf9f5;
+    --bg-bottom: #eceae4;
+    --glow: rgba(240, 128, 10, 0.10);
     --accent: #f0800a;
     --accent-deep: #db6c00;
     --on-accent: #ffffff;
@@ -489,67 +489,64 @@
 
   .metronome {
     position: relative;
+    isolation: isolate;
     width: min(88vw, 330px, 39vh);
     aspect-ratio: 300 / 420;
     flex: 0 0 auto;
     touch-action: manipulation;
   }
 
+  .metronome::before {
+    content: "";
+    position: absolute;
+    inset: 13% 11% 10%;
+    z-index: 0;
+    border-radius: 48% 48% 26% 26%;
+    background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 68%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+
   .metronome-svg {
+    position: relative;
+    z-index: 1;
     display: block;
     width: 100%;
     height: 100%;
     overflow: visible;
-    filter: drop-shadow(0 18px 20px color-mix(in srgb, var(--shadow) 82%, transparent));
+    filter: drop-shadow(0 20px 26px color-mix(in srgb, var(--shadow) 30%, transparent));
   }
 
   .metronome-floor {
-    fill: color-mix(in srgb, var(--shadow) 70%, transparent);
+    fill: color-mix(in srgb, var(--shadow) 30%, transparent);
   }
   .metronome-body {
-    fill: var(--wood-body);
-    stroke: var(--wood-edge);
+    fill: color-mix(in srgb, var(--surface) 20%, transparent);
+    stroke: color-mix(in srgb, var(--text) 8.5%, transparent);
     stroke-width: 1.2;
     stroke-linejoin: round;
   }
-  .metronome-sheen { pointer-events: none; }
-  .metronome-face {
-    fill: var(--wood-face);
-    stroke: var(--wood-line);
-    stroke-width: 1;
-    stroke-linejoin: round;
-  }
-  .metronome-top {
-    fill: var(--wood-edge);
-    opacity: 0.34;
-  }
-  .metronome-side {
-    fill: var(--wood-edge);
-    opacity: 0.24;
-  }
+  .metronome-sheen,
+  .metronome-face,
+  .metronome-top,
+  .metronome-side,
+  .metronome-grain { display: none; }
   .metronome-base {
-    fill: var(--wood-edge);
-    stroke: color-mix(in srgb, var(--wood-edge) 72%, #000 28%);
-    stroke-width: 0.8;
+    fill: color-mix(in srgb, var(--text) 7%, transparent);
+    stroke: none;
   }
   .metronome-foot {
-    fill: color-mix(in srgb, var(--wood-edge) 62%, #000 38%);
-  }
-  .metronome-grain {
-    stroke: var(--wood-line);
-    stroke-width: 0.8;
-    opacity: 0.45;
-    fill: none;
+    fill: color-mix(in srgb, var(--text) 12%, transparent);
   }
   .metronome-scale {
     fill: none;
-    stroke: var(--wood-line);
-    stroke-width: 1.6;
+    stroke: color-mix(in srgb, var(--text) 18%, transparent);
+    stroke-width: 1.4;
     stroke-linecap: round;
   }
   .metronome-tick {
-    stroke: var(--wood-line);
-    stroke-width: 1.5;
+    stroke: color-mix(in srgb, var(--text) 20%, transparent);
+    stroke-width: 1.4;
     stroke-linecap: round;
   }
   .metronome-tick.center {
@@ -557,8 +554,8 @@
     stroke-width: 2.4;
   }
   .metronome-rod {
-    stroke: var(--wood-rod);
-    stroke-width: 3;
+    stroke: color-mix(in srgb, var(--text) 44%, transparent);
+    stroke-width: 2.4;
     stroke-linecap: round;
   }
   .metronome-weight {
@@ -570,37 +567,43 @@
     fill: var(--accent);
   }
   .metronome-pivot {
-    fill: var(--wood-rod);
+    fill: color-mix(in srgb, var(--text) 46%, transparent);
   }
   .metronome-pivot-ring {
     fill: none;
-    stroke: var(--wood-line);
+    stroke: color-mix(in srgb, var(--text) 13%, transparent);
     stroke-width: 1;
   }
 
   .tempo-readout {
     position: absolute;
-    top: 6.3%;
+    top: 4.6%;
     left: 50%;
     transform: translateX(-50%);
-    width: 66%;
+    width: 82%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2px;
     z-index: 2;
+    padding: 8px 10px;
+    border: 1px solid var(--stroke);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 58%, transparent);
+    box-shadow: 0 12px 30px color-mix(in srgb, var(--shadow) 10%, transparent);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
   }
 
   .tempo-readout .step-button {
-    width: 34px;
-    height: 34px;
-    border: 1px solid var(--readout-border);
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
+    border: 0;
     border-radius: 50%;
-    background: var(--readout-button);
-    color: var(--wood-ink);
+    background: transparent;
+    color: var(--muted);
     opacity: 1;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
   }
   .tempo-readout .step-button .icon { width: 15px; height: 15px; }
   .tempo-readout .step-button:active,
@@ -621,7 +624,7 @@
     font-weight: 700;
     letter-spacing: -0.055em;
     font-variant-numeric: tabular-nums;
-    color: var(--wood-ink);
+    color: var(--text);
     text-align: center;
     min-width: 2.05em;
   }
@@ -638,7 +641,7 @@
     font-weight: 700;
     letter-spacing: 0.11em;
     text-transform: uppercase;
-    color: var(--wood-muted);
+    color: var(--muted);
   }
   .readout-meta .meta-dot { opacity: 0.45; }
   .readout-meta .italian {
@@ -1340,7 +1343,14 @@
   /* ---------- compact / narrow ---------- */
 
   @media (max-height: 720px), (max-width: 380px) {
-    .app { padding-left: 20px; padding-right: 20px; }
+    .app {
+      padding-top: calc(8px + env(safe-area-inset-top));
+      padding-bottom: calc(6px + env(safe-area-inset-bottom));
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .status-line { height: 18px; }
+    .web-notice { margin-top: 2px; padding: 6px 8px; }
     .beat-section { padding-top: 6px; }
     .controls { gap: 16px; }
     .metronome { width: min(72vw, 244px); }
@@ -1366,7 +1376,7 @@
       padding-bottom: calc(6px + env(safe-area-inset-bottom));
     }
     .metronome { width: min(63vw, 208px); }
-    .tempo-readout { width: 68%; }
+    .tempo-readout { width: 74%; padding: 6px 6px; }
     .tempo-readout .bpm-number { font-size: clamp(34px, 10.5vw, 40px); min-width: 2em; }
     .tempo-readout .step-button { width: 28px; height: 28px; }
     .readout-meta { margin-top: 2px; font-size: 6.5px; }
@@ -2416,7 +2426,7 @@
     const dark = state.theme === "dark" ||
       (state.theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", dark ? "#141416" : "#faf7f2");
+    if (meta) meta.setAttribute("content", dark ? "#141416" : "#fbf9f5");
   }
 
   function buildPendulumScale() {

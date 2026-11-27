@@ -106,7 +106,7 @@ ipconfig getifaddr en0
 
 ## 更新与排错
 
-- **改了文件但 iPhone 还看到旧版**：Service Worker 会优先返回缓存。把 `sw.js` 里的 `CACHE_VERSION` 递增（当前是 `tempo-web-v22`，下一次改成 `tempo-web-v23`），重新部署，再关闭 / 重开主屏幕图标。
+- **改了文件但 iPhone 还看到旧版**：Service Worker 会优先返回缓存。把 `sw.js` 里的 `CACHE_VERSION` 递增（当前是 `tempo-web-v23`，下一次改成 `tempo-web-v24`），重新部署，再关闭 / 重开主屏幕图标。
 - **点播放没有声音**：确认不是静音拨片、系统音量不是 0；先点一下页面任意按钮再点播放（iOS 要求用户手势后才能启动音频）；如果之前接过来电或耳机，刷新页面重试。
 - **屏幕自动变暗**：Safari 不支持 Wake Lock 时，网页无法阻止自动锁定。把自动锁定设为「永不」，或使用原生版。
 - **离线打不开**：Service Worker 只在 HTTPS 或 `localhost` 下工作；通过局域网 IP 的 HTTP 地址访问不会缓存。
