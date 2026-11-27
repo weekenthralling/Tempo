@@ -1,5 +1,5 @@
 /* Tempo Web — offline cache. Bump CACHE_VERSION when assets change. */
-const CACHE_VERSION = "tempo-web-v7";
+const CACHE_VERSION = "tempo-web-v19";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,7 +7,9 @@ const APP_SHELL = [
   "./icons/icon-180.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./icons/icon-1024.png"
+  "./icons/icon-1024.png",
+  "./audio/classroom-accent.wav",
+  "./audio/classroom-beat.wav"
 ];
 
 self.addEventListener("install", (event) => {

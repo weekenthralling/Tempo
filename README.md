@@ -6,7 +6,7 @@
 
 ## Web 版（免安装）
 
-`Web/` 里是一个可以直接在 iPhone Safari 打开的单页 PWA：同样的 30–300 BPM、拍号、细分、重拍、预备拍、Tap Tempo、4 种合成音色和深浅色界面，不需要 App Store、开发者账号或构建工具。
+`Web/` 里是一个可以直接在 iPhone Safari 打开的单页 PWA：同样的 30–300 BPM、拍号、细分、重拍、预备拍、Tap Tempo、8 种音色和深浅色界面，不需要 App Store、开发者账号或构建工具。
 
 ```bash
 cd Web
