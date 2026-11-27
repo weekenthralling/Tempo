@@ -22,7 +22,7 @@
     --glow: rgba(240, 128, 10, 0.10);
     --accent: #f0800a;
     --accent-deep: #db6c00;
-    --on-accent: #ffffff;
+    --on-accent: #2a1600;
     --text: #1c1917;
     --muted: #6b6560;
     --surface: rgba(255, 255, 255, 0.72);
@@ -41,6 +41,10 @@
     --wood-muted: rgba(59, 41, 27, 0.58);
     --readout-button: rgba(255, 255, 255, 0.34);
     --readout-border: rgba(88, 55, 26, 0.16);
+    --glass-fill: rgba(36, 39, 42, 0.06);
+    --glass-edge: rgba(36, 39, 42, 0.34);
+    --glass-shadow: rgba(40, 34, 26, 0.22);
+    --glass-reflection: 0.55;
     --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Helvetica Neue", sans-serif;
     --rounded: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
   }
@@ -71,6 +75,10 @@
     --wood-muted: rgba(244, 229, 209, 0.58);
     --readout-button: rgba(255, 255, 255, 0.08);
     --readout-border: rgba(255, 225, 190, 0.15);
+    --glass-fill: rgba(255, 255, 255, 0.055);
+    --glass-edge: rgba(255, 255, 255, 0.26);
+    --glass-shadow: rgba(0, 0, 0, 0.52);
+    --glass-reflection: 0.22;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -100,7 +108,11 @@
       --wood-muted: rgba(244, 229, 209, 0.58);
       --readout-button: rgba(255, 255, 255, 0.08);
       --readout-border: rgba(255, 225, 190, 0.15);
-    }
+      --glass-fill: rgba(255, 255, 255, 0.055);
+      --glass-edge: rgba(255, 255, 255, 0.26);
+      --glass-shadow: rgba(0, 0, 0, 0.52);
+      --glass-reflection: 0.22;
+      }
   }
 
   * { box-sizing: border-box; }
@@ -295,18 +307,18 @@
     border-radius: 50%;
   }
   .beat-dot.accent::before {
-    border-color: color-mix(in srgb, var(--text) 22%, transparent);
+    border-color: color-mix(in srgb, var(--text) 38%, transparent);
   }
   .beat-dot::after {
     content: "";
-    width: 9px;
-    height: 9px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--text) 16%, transparent);
+    background: color-mix(in srgb, var(--text) 42%, transparent);
     transition: background 0.12s ease, transform 0.14s ease, box-shadow 0.14s ease;
   }
-  .beat-track.dense .beat-dot::after { width: 7px; height: 7px; }
-  .beat-dot.accent::after { background: color-mix(in srgb, var(--text) 34%, transparent); }
+  .beat-track.dense .beat-dot::after { width: 8px; height: 8px; }
+  .beat-dot.accent::after { background: color-mix(in srgb, var(--text) 56%, transparent); }
   .beat-dot.active::after {
     background: var(--accent);
     transform: scale(1.22);
@@ -490,21 +502,10 @@
   .metronome {
     position: relative;
     isolation: isolate;
-    width: min(88vw, 330px, 39vh);
+    width: min(86vw, 330px, 39vh);
     aspect-ratio: 300 / 420;
     flex: 0 0 auto;
     touch-action: manipulation;
-  }
-
-  .metronome::before {
-    content: "";
-    position: absolute;
-    inset: 13% 11% 10%;
-    z-index: 0;
-    border-radius: 48% 48% 26% 26%;
-    background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 68%);
-    filter: blur(20px);
-    pointer-events: none;
   }
 
   .metronome-svg {
@@ -514,15 +515,19 @@
     width: 100%;
     height: 100%;
     overflow: visible;
-    filter: drop-shadow(0 20px 26px color-mix(in srgb, var(--shadow) 30%, transparent));
+    filter: drop-shadow(0 18px 16px var(--glass-shadow));
   }
 
   .metronome-floor {
     fill: color-mix(in srgb, var(--shadow) 30%, transparent);
   }
+  .metronome-reflection {
+    opacity: var(--glass-reflection);
+    pointer-events: none;
+  }
   .metronome-body {
-    fill: color-mix(in srgb, var(--surface) 20%, transparent);
-    stroke: color-mix(in srgb, var(--text) 8.5%, transparent);
+    fill: var(--glass-fill);
+    stroke: var(--glass-edge);
     stroke-width: 1.2;
     stroke-linejoin: round;
   }
@@ -532,11 +537,11 @@
   .metronome-side,
   .metronome-grain { display: none; }
   .metronome-base {
-    fill: color-mix(in srgb, var(--text) 7%, transparent);
+    fill: color-mix(in srgb, var(--text) 14%, transparent);
     stroke: none;
   }
   .metronome-foot {
-    fill: color-mix(in srgb, var(--text) 12%, transparent);
+    fill: color-mix(in srgb, var(--text) 18%, transparent);
   }
   .metronome-scale {
     fill: none;
@@ -545,7 +550,7 @@
     stroke-linecap: round;
   }
   .metronome-tick {
-    stroke: color-mix(in srgb, var(--text) 20%, transparent);
+    stroke: color-mix(in srgb, var(--text) 24%, transparent);
     stroke-width: 1.4;
     stroke-linecap: round;
   }
@@ -554,8 +559,8 @@
     stroke-width: 2.4;
   }
   .metronome-rod {
-    stroke: color-mix(in srgb, var(--text) 44%, transparent);
-    stroke-width: 2.4;
+    stroke: color-mix(in srgb, var(--text) 52%, transparent);
+    stroke-width: 3.2;
     stroke-linecap: round;
   }
   .metronome-weight {
@@ -571,7 +576,7 @@
   }
   .metronome-pivot-ring {
     fill: none;
-    stroke: color-mix(in srgb, var(--text) 13%, transparent);
+    stroke: color-mix(in srgb, var(--text) 18%, transparent);
     stroke-width: 1;
   }
 
@@ -580,29 +585,23 @@
     top: 4.6%;
     left: 50%;
     transform: translateX(-50%);
-    width: 82%;
+    width: 76%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2px;
     z-index: 2;
-    padding: 8px 10px;
-    border: 1px solid var(--stroke);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--surface) 58%, transparent);
-    box-shadow: 0 12px 30px color-mix(in srgb, var(--shadow) 10%, transparent);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    padding: 8px 0;
   }
 
   .tempo-readout .step-button {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     flex: 0 0 auto;
-    border: 0;
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
     border-radius: 50%;
-    background: transparent;
-    color: var(--muted);
+    background: color-mix(in srgb, var(--text) 4%, transparent);
+    color: var(--text);
     opacity: 1;
   }
   .tempo-readout .step-button .icon { width: 15px; height: 15px; }
@@ -619,7 +618,7 @@
 
   .tempo-readout .bpm-number {
     font-family: var(--rounded);
-    font-size: clamp(42px, 14vw, 58px);
+    font-size: clamp(46px, 15.5vw, 64px);
     line-height: 0.89;
     font-weight: 700;
     letter-spacing: -0.055em;
@@ -637,9 +636,9 @@
     gap: 5px;
     white-space: nowrap;
     font-family: var(--rounded);
-    font-size: 8px;
+    font-size: 9.5px;
     font-weight: 700;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
   }
@@ -650,7 +649,7 @@
     font-weight: 500;
     letter-spacing: 0.02em;
     text-transform: none;
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .metronome-section + .beat-section { padding-top: clamp(6px, 1.6vh, 14px); }
@@ -721,8 +720,8 @@
   /* ---------- transport ---------- */
 
   .controls {
-    margin-top: clamp(16px, 4vh, 38px);
-    padding-top: 0;
+    margin-top: auto;
+    padding-top: clamp(14px, 2.4vh, 28px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -735,9 +734,10 @@
     width: 78px;
     height: 78px;
     flex: 0 0 auto;
-    border: 1px solid var(--stroke);
+    border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
     border-radius: 50%;
-    background: var(--surface);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--shadow) 38%, transparent);
     color: color-mix(in srgb, var(--text) 85%, transparent);
     display: flex;
     flex-direction: column;
@@ -833,31 +833,31 @@
   }
 
   .status-line {
+    display: none;
     min-height: 16px;
     height: 20px;
     padding-top: 2px;
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 7px;
     font-size: 11px;
     font-weight: 500;
-    color: color-mix(in srgb, var(--muted) 88%, transparent);
+    color: var(--muted);
     font-variant-numeric: tabular-nums;
     flex: 0 0 auto;
   }
 
   .web-notice {
     margin-top: 6px;
-    padding: 8px 10px;
+    padding: 6px 9px;
     border: 1px solid var(--stroke);
-    border-radius: 12px;
-    background: color-mix(in srgb, var(--surface) 68%, transparent);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--surface) 52%, transparent);
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
-    font-size: 11px;
-    line-height: 1.35;
+    font-size: 10.5px;
+    line-height: 1.3;
     color: var(--muted);
     flex: 0 0 auto;
   }
@@ -1352,7 +1352,7 @@
     .status-line { height: 18px; }
     .web-notice { margin-top: 2px; padding: 6px 8px; }
     .beat-section { padding-top: 6px; }
-    .controls { gap: 16px; }
+    .controls { margin-top: 14px; padding-top: 0; gap: 16px; }
     .metronome { width: min(72vw, 244px); }
     .tempo-readout .bpm-number { font-size: clamp(38px, 12vw, 46px); }
     .tempo-readout .step-button { width: 30px; height: 30px; }
@@ -1383,7 +1383,7 @@
     .readout-meta .italian { font-size: 8px; }
     .metronome-section { padding-top: 2px; }
     .metronome-section + .beat-section { padding-top: 4px; }
-    .controls { margin-top: 4px; gap: 12px; }
+    .controls { margin-top: 4px; padding-top: 0; gap: 12px; }
     .beat-track { min-height: 18px; }
     .beat-dot { width: 13px; height: 13px; }
     .beat-dot::after { width: 7px; height: 7px; }
@@ -1467,9 +1467,16 @@
               <stop offset="0" stop-color="#ffffff" stop-opacity="0.22" />
               <stop offset="1" stop-color="#000000" stop-opacity="0.14" />
             </linearGradient>
+            <linearGradient id="glassSheen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="0.38" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="0.72" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0.28" />
+            </linearGradient>
           </defs>
 
           <ellipse class="metronome-floor" cx="150" cy="408" rx="126" ry="8" />
+          <path class="metronome-reflection" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 H 267 C 286 410 296 403 294 385 L 263 31 C 262 23 258 18 250 18 Z" fill="url(#glassSheen)" />
           <path class="metronome-body" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 H 267 C 286 410 296 403 294 385 L 263 31 C 262 23 258 18 250 18 Z" />
           <path class="metronome-sheen" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 H 267 C 286 410 296 403 294 385 L 263 31 C 262 23 258 18 250 18 Z" fill="url(#metronomeSheen)" />
           <path class="metronome-side" d="M 50 18 C 42 18 38 23 37 31 L 6 385 C 4 403 14 410 33 410 L 46 397 L 55 59 C 56 51 60 48 67 48 Z" />
@@ -1489,8 +1496,8 @@
 
           <g id="rodGroup">
             <line class="metronome-rod" x1="150" y1="340" x2="150" y2="115"></line>
-            <rect id="metronomeWeight" class="metronome-weight" x="132" y="206.7" width="36" height="11" rx="5.5"></rect>
-            <circle class="metronome-tip" cx="150" cy="119" r="5"></circle>
+            <rect id="metronomeWeight" class="metronome-weight" x="128" y="205" width="44" height="14" rx="7"></rect>
+            <circle class="metronome-tip" cx="150" cy="119" r="6"></circle>
           </g>
 
           <circle class="metronome-pivot-ring" cx="150" cy="340" r="8"></circle>
@@ -1551,7 +1558,7 @@
 
     <div id="webNotice" class="web-notice">
       <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
-      <p><strong>Keep this page open.</strong> iOS pauses web audio when the screen locks or you switch apps.</p>
+      <p><strong>Keep this page open.</strong> iOS pauses audio when locked.</p>
       <button id="dismissNotice" type="button" aria-label="Dismiss web audio note">
         <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
       </button>
@@ -2509,7 +2516,7 @@
     const progress = (bpm - MIN_BPM) / (MAX_BPM - MIN_BPM);
     const eased = 1 - Math.pow(1 - progress, 2);
     const weightCenterY = 145 + eased * 170;
-    dom.metronomeWeight.setAttribute("y", (weightCenterY - 5.5).toFixed(1));
+    dom.metronomeWeight.setAttribute("y", (weightCenterY - 7).toFixed(1));
   }
 
   function renderMeter() {
